@@ -1,0 +1,43 @@
+name: Publish Kashmiri reader
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare Kashmiri-only static website
+        run: |
+          mkdir -p _site
+          cp index.html app.js style.css fonts.css chapter-one-kashmiri.txt READER-CODE-LICENSE.txt _site/
+          cp -r assets _site/assets
+          touch _site/.nojekyll
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('chapter-one.json').read_text())
+          data.pop('sourceIssues', None)
+          for passage in data['passages']:
+              for field in ('english', 'sourceEnglish', 'sourceBlocks'):
+                  passage.pop(field, None)
+          Path('_site/chapter-one.json').write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
+          PY
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Publish website
+        id: deployment
+        uses: actions/deploy-pages@v4
