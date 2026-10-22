@@ -51,3 +51,5 @@ In this repository's **Settings → Pages**, select **Deploy from a branch**, br
 The cipher build and complete source-coverage tests passed. Chromium browser checks covered all 52 passages, seven sections, bilingual switching, persisted bookmarks, search, map selection, theme switching, pagination, phone navigation, 360-pixel overflow, and JavaScript errors. The test script is `tests/reader.cjs`; install Playwright separately and set `SEERAH_TEST_URL` to your running static server to repeat it.
 
 Kashmiri is the default reading language. In bilingual mode the Kashmiri translation appears before the English source. The Kashmiri-only text is also available as `chapter-one-kashmiri.txt`. Existing browser preferences from the initial English-first edition are migrated to Kashmiri on the first updated visit.
+
+The current website is Kashmiri-only: English passage rendering and the language switch have been removed. Original English source records remain in Git for provenance. The Pages workflow publishes a sanitized JSON without English passage fields or source blocks. `.github/workflows/pages.yml` in zameer deploys the static reader through GitHub Actions.

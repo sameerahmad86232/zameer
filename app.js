@@ -60,7 +60,7 @@
     if(action==='theme'){document.body.classList.toggle('night');updateTheme();save();}
     if(action==='menu')toggleMenu(!$('#sidebar').classList.contains('open'));
     if(action==='map'){selectPlace(0);showDialog('#map-dialog');}
-    
+
     const sec=event.target.closest('[data-section]')?.dataset.section;if(sec){renderSection(sec,true);}
     const place=event.target.closest('[data-place]')?.dataset.place;if(place!==undefined)selectPlace(Number(place));
     const readPlace=event.target.closest('[data-read-place]')?.dataset.readPlace;if(readPlace){$('#map-dialog').close();renderSection(readPlace,true);}
