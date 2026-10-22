@@ -21,18 +21,19 @@ jobs:
       - name: Prepare Kashmiri-only static website
         run: |
           mkdir -p _site
-          cp index.html app.js style.css fonts.css chapter-one-kashmiri.txt READER-CODE-LICENSE.txt _site/
+          cp index.html app.js style.css fonts.css chapter-one-kashmiri.txt chapter-two-kashmiri.txt READER-CODE-LICENSE.txt _site/
           cp -r assets _site/assets
           touch _site/.nojekyll
           python3 - <<'PY'
           import json
           from pathlib import Path
-          data = json.loads(Path('chapter-one.json').read_text())
-          data.pop('sourceIssues', None)
-          for passage in data['passages']:
-              for field in ('english', 'sourceEnglish', 'sourceBlocks'):
-                  passage.pop(field, None)
-          Path('_site/chapter-one.json').write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
+          for filename in ('chapter-one.json', 'chapter-two.json'):
+              data = json.loads(Path(filename).read_text())
+              data.pop('sourceIssues', None)
+              for passage in data['passages']:
+                  for field in ('english', 'sourceEnglish', 'sourceBlocks'):
+                      passage.pop(field, None)
+              Path('_site', filename).write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
           PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
