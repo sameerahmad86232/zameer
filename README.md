@@ -53,3 +53,5 @@ The cipher build and complete source-coverage tests passed. Chromium browser che
 Kashmiri is the default reading language. In bilingual mode the Kashmiri translation appears before the English source. The Kashmiri-only text is also available as `chapter-one-kashmiri.txt`. Existing browser preferences from the initial English-first edition are migrated to Kashmiri on the first updated visit.
 
 The current website is Kashmiri-only: English passage rendering and the language switch have been removed. Original English source records remain in Git for provenance. The Pages workflow publishes a sanitized JSON without English passage fields or source blocks. `.github/workflows/pages.yml` in zameer deploys the static reader through GitHub Actions.
+
+Kashmiri text is rendered with locally hosted Noto Nastaliq Urdu (SIL OFL); enlarged leading accommodates Nastaliq letterforms and vowel marks. No external font request is required.
