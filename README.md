@@ -49,3 +49,5 @@ In this repository's **Settings → Pages**, select **Deploy from a branch**, br
 ## Verification
 
 The cipher build and complete source-coverage tests passed. Chromium browser checks covered all 52 passages, seven sections, bilingual switching, persisted bookmarks, search, map selection, theme switching, pagination, phone navigation, 360-pixel overflow, and JavaScript errors. The test script is `tests/reader.cjs`; install Playwright separately and set `SEERAH_TEST_URL` to your running static server to repeat it.
+
+Kashmiri is the default reading language. In bilingual mode the Kashmiri translation appears before the English source. The Kashmiri-only text is also available as `chapter-one-kashmiri.txt`. Existing browser preferences from the initial English-first edition are migrated to Kashmiri on the first updated visit.
